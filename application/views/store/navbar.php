@@ -30,7 +30,19 @@
                     <i class="fas fa-fw fa-archive"></i>
                     <span>Bahan Baku</span></a>
             </li>
-            <!-- Nav Item - Bahan Baku -->
+            <!-- Nav Item - Menu Produk -->
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('store/produk'); ?>">
+                    <i class="fas fa-fw fa-book-open"></i>
+                    <span>Menu Produk</span></a>
+            </li>
+            <!-- Nav Item - Penjualan -->
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('store/penjualan'); ?>">
+                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    <span>Data Penjualan</span></a>
+            </li>
+            <!-- Nav Item - Penggunaan Bahan Baku -->
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('store/penggunaan'); ?>">
                     <i class="fas fa-fw fa-archive"></i>
@@ -41,6 +53,12 @@
                 <a class="nav-link" href="<?= base_url('store/permintaanbarang'); ?>">
                     <i class="fas fa-fw fa-file"></i>
                     <span>Permintaan Barang</span></a>
+            </li>
+            <!-- Nav Item - Peramalan -->
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('store/peramalan'); ?>">
+                    <i class="fas fa-fw fa-chart-line"></i>
+                    <span>Peramalan Penjualan Produk</span></a>
             </li>
             <!-- Nav Item - Logout -->
             <li class="nav-item">

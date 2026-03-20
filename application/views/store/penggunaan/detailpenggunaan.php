@@ -22,7 +22,7 @@
                         <span class="text">Tambah</span>
                     </a>
                 <?php endif; ?>
-                <?php if ($detailpenggunaan >> '0') : ?>
+                <?php if (count($detailpenggunaan) > 0) : ?>
                     <a href="<?= base_url('store/penggunaan/cetak/' . $penggunaan['id_penggunaan']); ?>" target="_blank" class="btn btn-secondary btn-icon-split btn-sm">
                         <span class="icon text-white-50">
                             <i class="fas fa-print"></i>
