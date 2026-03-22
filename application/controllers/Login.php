@@ -20,18 +20,13 @@ class Login extends CI_Controller
         if ($inputan) {
             //jk ada inputan jalankan model mlogin fungsi login 
             $login = $this->Muser->login($inputan);
-            if ($login == "admin") {
+
+            if ($login == "owner") {
                 $this->session->set_flashdata('pesan', 'Selamat Datang Di Sistem Inventory Barang Senja Kopi');
-                redirect('admin/beranda', 'refresh');
+                redirect('owner/beranda', 'refresh');
             } elseif ($login == "store") {
                 $this->session->set_flashdata('pesan', 'Selamat Datang Di Sistem Inventory Barang Senja Kopi');
                 redirect('store/beranda', 'refresh');
-            } elseif ($login == "purchasing") {
-                $this->session->set_flashdata('pesan', 'Selamat Datang Di Sistem Inventory Barang Senja Kopi');
-                redirect('purchasing/beranda', 'refresh');
-            } elseif ($login == "gudang") {
-                $this->session->set_flashdata('pesan', 'Selamat Datang Di Sistem Inventory Barang Senja Kopi');
-                redirect('gudang/beranda', 'refresh');
             } elseif ($login == "gagal") {
                 $this->session->set_flashdata('pesan', 'Login Gagal, Cek Email dan Password Anda');
                 redirect('', 'refresh');

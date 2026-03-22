@@ -7,7 +7,6 @@
 
         function tampil_barang()
         {
-            $this->db->join('supplier', 'supplier.id_supplier = barang.id_supplier', 'left');
             $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori', 'left');
             $ambil = $this->db->get('barang');
             return $ambil->result_array();
@@ -35,7 +34,6 @@
         function simpan_barang($inputan)
         {
             $id_kategori = $inputan['id_kategori'];
-            $id_supplier = $inputan['id_supplier'];
             $kode_barang = $inputan['kode_barang'];
             $nama_barang = $inputan['nama_barang'];
             $stock_toko = $inputan['stock_toko'];
@@ -43,7 +41,6 @@
             $satuan = $inputan['satuan'];
 
             $this->db->where('id_kategori', $id_kategori);
-            $this->db->where('id_supplier', $id_supplier);
             $this->db->where('kode_barang', $kode_barang);
             $this->db->where('nama_barang', $nama_barang);
             $this->db->where('stock_toko', $stock_toko);
@@ -62,7 +59,6 @@
         function detail_barang($id_barang)
         {
             $this->db->join('kategori', 'kategori.id_kategori = barang.id_kategori', 'left');
-            $this->db->join('supplier', 'supplier.id_supplier = barang.id_supplier', 'left');
             $this->db->where('id_barang', $id_barang);
             $ambil = $this->db->get('barang');
             return $ambil->row_array();
@@ -72,7 +68,6 @@
         {
             $this->db->where('kode_barang', $inputan['kode_barang']);
             $this->db->where('id_kategori', $inputan['id_kategori']);
-            $this->db->where('id_supplier', $inputan['id_supplier']);
             $this->db->where('stock_toko', $inputan['stock_toko']);
             $this->db->where('stock_gudang', $inputan['stock_gudang']);
             $this->db->where('satuan', $inputan['satuan']);
