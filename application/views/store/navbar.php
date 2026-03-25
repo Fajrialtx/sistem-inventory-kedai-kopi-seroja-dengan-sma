@@ -30,7 +30,12 @@
                     <i class="fas fa-fw fa-archive"></i>
                     <span>Bahan Baku</span></a>
             </li>
-            <!-- Nav Item - Menu Produk -->
+            <!-- Nav Item - Stok Masuk -->
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('store/stokmasuk'); ?>">
+                    <i class="fas fa-fw fa-plus-circle"></i>
+                    <span>Data Stok Masuk</span></a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('store/produk'); ?>">
                     <i class="fas fa-fw fa-book-open"></i>
