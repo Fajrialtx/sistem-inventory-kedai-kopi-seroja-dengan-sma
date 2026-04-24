@@ -45,12 +45,16 @@ class Mpenjualan extends CI_Model
 
         // 2. Simpan detail dan kurangi stok
         $this->load->model('Mproduk');
+        $this->load->model('Mresep');
         foreach ($data_detail as $item) {
             $item['id_penjualan'] = $id_penjualan;
             $this->db->insert('detail_penjualan', $item);
 
             // Kurangi stok produk
             $this->Mproduk->kurangi_stok($item['id_produk'], $item['jumlah']);
+
+            // Kurangi bahan baku berdasarkan resep
+            $this->Mresep->kurangi_bahan_baku($item['id_produk'], $item['jumlah']);
         }
 
         $this->db->trans_complete();
@@ -69,10 +73,14 @@ class Mpenjualan extends CI_Model
         // 1. Ambil detail untuk kembalikan stok
         $detail = $this->detail_transaksi($id_penjualan);
         $this->load->model('Mproduk');
+        $this->load->model('Mresep');
         
         foreach ($detail as $item) {
-            // Kembalikan stok
+            // Kembalikan stok produk
             $this->Mproduk->tambah_stok($item['id_produk'], $item['jumlah']);
+
+            // Kembalikan bahan baku berdasarkan resep
+            $this->Mresep->kembalikan_bahan_baku($item['id_produk'], $item['jumlah']);
         }
 
         // 2. Hapus penjualan (detail akan terhapus otomatis by cascade di db)

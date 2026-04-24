@@ -141,13 +141,19 @@
                                 <?php endif; ?>
                             </td>
                             <td class="text-center">
-                                <a href="<?= base_url('store/produk/ubah/' . $value['id_produk']); ?>" class="btn btn-warning btn-icon-split btn-sm">
+                                <a href="<?= base_url('store/produk/resep/' . $value['id_produk']); ?>" class="btn btn-success btn-icon-split btn-sm mb-1">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-flask"></i>
+                                    </span>
+                                    <span class="text">Resep</span>
+                                </a>
+                                <a href="<?= base_url('store/produk/ubah/' . $value['id_produk']); ?>" class="btn btn-warning btn-icon-split btn-sm mb-1">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-edit"></i>
                                     </span>
                                     <span class="text">Edit</span>
                                 </a>
-                                <a href="" class="btn btn-danger btn-icon-split btn-sm btn-hapus" idnya="<?= $value['id_produk']; ?>">
+                                <a href="" class="btn btn-danger btn-icon-split btn-sm btn-hapus mb-1" idnya="<?= $value['id_produk']; ?>">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-trash"></i>
                                     </span>

@@ -10,7 +10,6 @@ class Beranda extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Mbarang');
-        $this->load->model('Mpermintaanbarang');
 
         $this->load->model('Muser');
         if (!$this->session->userdata("owner")) {

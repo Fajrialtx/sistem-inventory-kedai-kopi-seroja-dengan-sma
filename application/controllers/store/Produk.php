@@ -9,6 +9,7 @@ class Produk extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Mproduk');
+        $this->load->model('Mresep');
         if (!$this->session->userdata("store")) {
             $this->session->set_flashdata('pesan', 'Anda harus login');
             redirect('', 'refresh');
@@ -161,5 +162,67 @@ class Produk extends CI_Controller
     {
         $idnya = $this->input->post("id");
         $this->Mproduk->hapus_produk($idnya);
+    }
+
+    /**
+     * Halaman kelola resep produk (daftar bahan baku + form tambah)
+     */
+    public function resep($id_produk)
+    {
+        $data['dataproduk'] = $this->Mproduk->detail_produk($id_produk);
+
+        if (empty($data['dataproduk'])) {
+            $this->session->set_flashdata('gagal', 'Produk tidak ditemukan!');
+            redirect('store/produk', 'refresh');
+        }
+
+        $data['title'] = 'Resep Produk: ' . $data['dataproduk']['nama_produk'];
+        $data['resep'] = $this->Mresep->tampil_resep($id_produk);
+        $data['barang'] = $this->Mresep->tampil_semua_barang();
+
+        $this->load->view('header', $data);
+        $this->load->view('store/navbar', $data);
+        $this->load->view('store/produk/resepproduk', $data);
+        $this->load->view('footer');
+    }
+
+    /**
+     * Tambah bahan baku ke resep produk
+     */
+    public function tambah_resep($id_produk)
+    {
+        $this->form_validation->set_rules('id_barang', 'Bahan Baku', 'required');
+        $this->form_validation->set_rules('jumlah_pakai', 'Jumlah Pakai', 'required|numeric|greater_than[0]');
+
+        if ($this->form_validation->run() == TRUE) {
+            $data = [
+                'id_produk' => $id_produk,
+                'id_barang' => $this->input->post('id_barang'),
+                'jumlah_pakai' => $this->input->post('jumlah_pakai')
+            ];
+
+            $query = $this->Mresep->simpan_resep($data);
+
+            if ($query == 'sukses') {
+                $this->session->set_flashdata('pesan', 'Bahan baku berhasil ditambahkan ke resep!');
+            } elseif ($query == 'duplikat') {
+                $this->session->set_flashdata('gagal', 'Bahan baku ini sudah ada di resep produk!');
+            } else {
+                $this->session->set_flashdata('gagal', 'Gagal menambahkan bahan baku!');
+            }
+        } else {
+            $this->session->set_flashdata('gagal', validation_errors());
+        }
+
+        redirect('store/produk/resep/' . $id_produk, 'refresh');
+    }
+
+    /**
+     * Hapus bahan baku dari resep (AJAX)
+     */
+    public function hapus_resep()
+    {
+        $id_resep = $this->input->post("id");
+        $this->Mresep->hapus_resep($id_resep);
     }
 }
