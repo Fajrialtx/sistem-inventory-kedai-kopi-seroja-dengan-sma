@@ -188,6 +188,25 @@ CREATE TABLE `detail_penjualan` (
   CONSTRAINT `detail_penjualan_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- ===========================================================
+-- TABEL: hasil_peramalan (Hasil Peramalan SMA Semua Produk)
+-- ===========================================================
+CREATE TABLE `hasil_peramalan` (
+  `id_hasil` int(11) NOT NULL AUTO_INCREMENT,
+  `id_produk` int(11) NOT NULL,
+  `tgl_eksekusi` date NOT NULL COMMENT 'Tanggal peramalan dijalankan',
+  `periode` int(11) NOT NULL COMMENT 'Periode SMA (3, 5, atau 7)',
+  `prediksi` int(11) DEFAULT NULL COMMENT 'Hasil prediksi jumlah penjualan',
+  `mad` decimal(10,2) DEFAULT NULL COMMENT 'Mean Absolute Deviation',
+  `mse` decimal(15,2) DEFAULT NULL COMMENT 'Mean Squared Error',
+  `mape` decimal(10,2) DEFAULT NULL COMMENT 'Mean Absolute Percentage Error',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_hasil`),
+  UNIQUE KEY `unique_eksekusi` (`id_produk`, `tgl_eksekusi`, `periode`),
+  KEY `tgl_eksekusi` (`tgl_eksekusi`),
+  CONSTRAINT `hasil_peramalan_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
